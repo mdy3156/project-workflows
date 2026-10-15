@@ -1,0 +1,4 @@
+interface:
+  display_name: "Continue Work"
+  short_description: "Checkpoint and resume work across sessions"
+  default_prompt: "Use $continue-work to recover the selected task from its saved state, verify the current evidence, and continue the next authorized step."
