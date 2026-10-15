@@ -1,0 +1,4 @@
+interface:
+  display_name: "Curate Knowledge"
+  short_description: "Consolidate knowledge without losing evidence"
+  default_prompt: "Use $curate-knowledge to consolidate the relevant project documentation, preserve reproducibility, and retire redundant Markdown."
