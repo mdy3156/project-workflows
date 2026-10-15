@@ -1,0 +1,4 @@
+interface:
+  display_name: "Record Knowledge"
+  short_description: "Record project knowledge with traceable evidence"
+  default_prompt: "Use $record-knowledge to capture this experiment, investigation, or implemented architecture in the project's existing documentation."
