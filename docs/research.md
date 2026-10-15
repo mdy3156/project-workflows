@@ -1,7 +1,7 @@
 # 調査と採用した考え方
 
 確認日: 2026-10-16。これは設計の根拠を記録する文書です。
-現在の構成と使い方は、実装後のArchitectureとREADMEを正本にします。
+現在の構成と使い方は、[Architecture](architecture.md)と[README](../README.md)が正本です。
 
 ## 公式仕様
 
