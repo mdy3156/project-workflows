@@ -1,0 +1,1 @@
+{"run_id":"cache-01","code_commit":"3333333333333333333333333333333333333333","dirty_tree":false,"config":{"ttl":60,"concurrency":4,"seed":3},"data":"requests-v1","protocol":"load-v1","n":1000,"p95_ms":42}

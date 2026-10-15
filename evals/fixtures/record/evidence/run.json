@@ -1,0 +1,19 @@
+{
+  "run_id": "trial-017",
+  "experiment": "batch-size",
+  "started_at": "2026-10-15T07:00:00Z",
+  "status": "interrupted",
+  "code_commit": "1111111111111111111111111111111111111111",
+  "dirty_tree": true,
+  "source_patch": null,
+  "config_path": "configs/train.json",
+  "resolved_config": {"batch_size":64,"seed":7,"split":"random-v1","epochs":40},
+  "completed_epochs": 12,
+  "dataset_version": "toy-data-v3",
+  "validation": {"protocol":"random-v1","count":800,"metric":"accuracy","value":0.91},
+  "baseline": {"run_id":"trial-009","protocol":"group-v2","count":600,"accuracy":0.87},
+  "artifacts": [{"path":"scratch/trial-017/weights.bin","availability":"worker disk lost","sha256":null}],
+  "environment": {"python":"3.12","lockfile_digest":null},
+  "command": "python train.py --config configs/train.json --batch-size 64 --seed 7 --split random-v1",
+  "error": "worker preempted; no final evaluation"
+}
