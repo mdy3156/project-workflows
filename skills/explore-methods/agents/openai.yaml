@@ -1,0 +1,4 @@
+interface:
+  display_name: "手法を探索する"
+  short_description: "指定分野で候補を並列に調査・実験し、手法ごとの判断用PDFを届ける"
+  default_prompt: "$explore-methods 指定した分野・改善方針の範囲で候補を調査・設計・実験し、手法ごとに判断用PDFを作成してください。"

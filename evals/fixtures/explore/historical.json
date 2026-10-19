@@ -1,0 +1,10 @@
+{
+  "synthetic": true,
+  "method": "shaped-ppo",
+  "seed": 1,
+  "split": "random-v0",
+  "score": 0.95,
+  "status": "completed",
+  "source_snapshot": null,
+  "note": "グループの重複がある旧分割。現在のgroup-v1と比較不可。"
+}

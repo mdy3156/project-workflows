@@ -12,7 +12,7 @@ from strictyaml import load
 
 
 ROOT = Path(__file__).resolve().parents[1]
-NAMES = {"record-knowledge", "curate-knowledge", "continue-work"}
+NAMES = {"explore-methods", "record-knowledge", "curate-knowledge", "continue-work"}
 
 
 class DistributionTests(unittest.TestCase):
@@ -81,6 +81,35 @@ class DistributionTests(unittest.TestCase):
         self.assertFalse(completed & remaining)
         self.assertEqual(completed | remaining, set(range(4)))
         self.assertEqual(status["status"], "RUNNING")
+        self.assertEqual(fixture.read_bytes(), before)
+
+    def test_exploration_fixture_preserves_failed_runs_and_existing_output(self):
+        import json
+        import sys
+        fixture = ROOT / "evals/fixtures/explore/tools/probe.py"
+        before = fixture.read_bytes()
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "result.json"
+            command = [sys.executable, str(fixture), "--method", "adaptive-l1",
+                       "--seed", "2", "--output", str(output)]
+            subprocess.run(command, check=True, capture_output=True, text=True)
+            saved = output.read_bytes()
+            failed = json.loads(saved)
+            self.assertTrue(failed["synthetic"])
+            self.assertEqual(failed["status"], "failed")
+            self.assertIsNone(failed["value"])
+            self.assertEqual(failed["cost_units"], 1)
+            duplicate = subprocess.run(command, capture_output=True, text=True)
+            self.assertNotEqual(duplicate.returncode, 0)
+            self.assertEqual(output.read_bytes(), saved)
+            success = Path(tmp) / "success.json"
+            subprocess.run([sys.executable, str(fixture), "--method", "terminal-ppo",
+                            "--seed", "1", "--output", str(success)],
+                           check=True, capture_output=True, text=True)
+            observed = json.loads(success.read_bytes())
+            self.assertEqual(observed["status"], "completed")
+            self.assertEqual(observed["split"], "group-v1")
+            self.assertEqual(observed["value"], 0.54)
         self.assertEqual(fixture.read_bytes(), before)
 
 
