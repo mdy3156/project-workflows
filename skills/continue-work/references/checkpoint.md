@@ -1,51 +1,49 @@
-# A small checkpoint
+# 小さなチェックポイント
 
-Use this only when the project has no suitable task owner. It is a suggested
-shape, not a schema. Omit fields that do not affect recovery. Write into the
-target project, never into the installed skill directory.
+プロジェクトに適切なタスクの保存先がない場合だけ使う。推奨する形であり、必須の書式ではない。
+再開に影響しない項目は省く。対象のプロジェクトへ保存し、インストールされたSkillの
+ディレクトリには書き込まない。
 
 ```markdown
-# Short task name
+# 短いタスク名
 
-Updated: date/time with timezone. State: active, blocked, paused, or complete.
+更新: タイムゾーン付きの日時。状態: 作業中、進行不可、一時停止、完了のいずれか。
 
-## Goal and boundaries
+## 目的と範囲
 
-Outcome and completion conditions. Constraints that still affect execution.
-Link a design, issue, or specification instead of copying it.
+達成したい結果と完了条件。作業に引き続き影響する制約。
+設計、Issue、仕様は複製せずにリンクする。
 
-## Current state
+## 現在の状態
 
-Repository/worktree and branch; relevant revision and dirty work.
-Completed work with evidence. Unfinished work, failures, or a concrete blocker.
-For live jobs: actual service/job/run ID, last observed status and time,
-launch config/source references, outputs and how to check the job again.
+リポジトリ・ワークツリーとブランチ、関連するリビジョン、未コミットの変更。
+根拠のある完了済み作業。未完了の作業、失敗、進行を妨げる具体的な要因。
+稼働中のジョブは、実際のサービス・ジョブ・実行のID、最後に確認した状態と日時、
+起動時の設定・ソースへの参照、出力、ジョブを再確認する方法。
 
-## Next action
+## 次の行動
 
-One actionable next step, its prerequisite, and how to recognize success.
-Keep any remaining checklist here; do not maintain a second task inventory.
+実行できる次の一手、その前提条件、成功を確認する方法。
+残りのチェックリストはここに置き、別のタスク一覧を管理しない。
 
-## Knowledge and evidence
+## 知識と根拠
 
-Links to surviving experiment/research/architecture records, test evidence,
-and external artifacts. Explicitly identify unavailable or local-only evidence.
+残っている実験・調査・構造の記録、テストの証拠、外部の成果物へのリンク。
+利用できない根拠やローカルにしかない根拠を明記する。
 ```
 
-Prefer a stable task name across sessions, not a new file for each date or agent.
-Keep task-specific designs beside the task or in the planner's existing location.
-Do not create a new permanent `decisions.md`, `progress.md`, or `findings.md` when
-this one file suffices. If those files are already part of the chosen planner,
-respect their roles and link to each owner rather than duplicating state.
+セッションをまたいで安定したタスク名を使い、日付やエージェントごとに新しいファイルを作らない。
+タスク固有の設計はタスクのそばか、既存の計画管理の保存先に置く。
+この1枚で足りる場合は、新しい恒久的な `decisions.md`、`progress.md`、`findings.md` を作らない。
+選んだ計画管理ですでに使っている場合は、その役割を尊重し、状態を複製せずに各保存先へリンクする。
 
-For example, “collect outputs from the existing evaluation run after querying
-its scheduler; validate all expected shards before marking complete” is a useful
-next action. “Continue experiments” is not. If the job's configuration cannot
-be recovered, write that constraint explicitly rather than filling in today's
-local config.
+次の行動は、たとえば「スケジューラで状態を照会してから既存の評価実行の出力を収集し、
+予定したすべてのシャードを検証してから完了にする」のように具体的に書く。
+「実験を続ける」だけでは足りない。ジョブの設定を復元できない場合は、その制約を明記し、
+現在のローカル設定で埋めない。
 
-For a checkpoint to survive loss of the workspace itself, it needs the project's
-authorized durable storage, usually committed and pushed Git history or an
-existing task service. A file saved only on one machine survives session loss,
-not loss of that machine. Review it for secrets before sharing; do not upload
-session transcripts, environment dumps, or credential-bearing job commands.
+作業環境そのものが失われてもチェックポイントを使うには、プロジェクトで許可された永続的な
+保存先が必要になる。通常はコミット・プッシュ済みのGit履歴か、既存のタスク管理サービスを使う。
+一つの端末にしかないファイルは、セッションが失われても残るが、その端末の消失には備えられない。
+共有前に秘密情報を確認し、会話の全文、環境変数などの一括出力、認証情報を含むジョブのコマンドを
+アップロードしない。

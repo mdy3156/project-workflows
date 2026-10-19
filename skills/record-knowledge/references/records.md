@@ -1,77 +1,72 @@
-# Record shapes
+# 記録に含める情報
 
-These are prompts for deciding what matters, not a mandatory schema. Use the
-relevant shape, omit inapplicable fields, and keep missing critical evidence
-explicit. Reuse project names and identifiers rather than creating a new ID system.
+記録に必要な情報を判断するための手引きであり、必須の書式ではない。
+該当する種類を参考にし、不要な項目は省き、重要な根拠の欠落は明記する。
+プロジェクトの既存の名前と識別子を使い、新しいID体系を作らない。
 
-## Experiment
+## 実験
 
-A readable record usually answers:
+読み手が理解できる記録は、通常、次の問いに答える。
 
-1. What question or hypothesis was tested? What changed and what was held fixed?
-2. Which runs and exact conditions produced these observations?
-3. What happened, including failures, exclusions, and incomplete work?
-4. What does the comparison support, and what does it leave unresolved?
+1. どの問いや仮説を検証したか。何を変え、何を固定したか。
+2. どの実行と正確な条件から、この観測結果が得られたか。
+3. 失敗、除外、未完了の作業も含め、何が起きたか。
+4. 比較から何が言え、何が未解決か。
 
-For reproducibility, retain the following information or precise references to
-records that own it:
+再現のため、次の情報か、その情報を持つ記録への正確な参照を残す。
 
-| Evidence | What makes the reference useful |
+| 根拠 | 参照先から確認できる必要があること |
 | --- | --- |
-| Run identity | Tracker/project namespace plus run ID or an actual run URL; without a tracker, the project's existing result path or manifest |
-| Source | Generating commit and source state; for dirty source, a retained patch/snapshot including relevant untracked code, or an explicit unrecoverable gap |
-| Configuration | Versioned config plus resolved overrides or immutable resolved config; the invocation when needed to reconstruct execution |
-| Data and environment | Data/model versions or fingerprints, preprocessing recipe, split membership/protocol, seeds, runtime/lockfile and material hardware constraints |
-| Evaluation | Metric definition, units, direction, population/denominator, selection versus held-out evaluation, comparator and uncertainty when available |
-| Outcomes | Planned versus completed work, measured results, stop/failure reason, and relevant cost or resource use |
-| Artifacts | Actual storage locator, version/checksum when available, and whether the artifact is retained, local-only, inaccessible, or lost |
+| 実行の識別 | トラッカー・プロジェクトの名前空間と実行ID、または実在する実行URL。トラッカーがなければ、プロジェクトの既存の結果パスかマニフェスト |
+| ソース | 生成時のコミットとソースの状態。未コミットの変更があれば、関連する未追跡コードも含む保存済みのパッチ・スナップショット、または復元できない部分の明記 |
+| 設定 | 版を特定できる設定と実際の上書き、または変更されない適用済み設定。実行の再構成に必要なら起動コマンド |
+| データと環境 | データ・モデルの版やフィンガープリント、前処理、分割の構成・手順、シード、実行環境・ロックファイル、結果に関わるハードウェアの制約 |
+| 評価 | 指標の定義、単位、大小の良否、母集団・分母、選択用評価と保留データでの評価の区別、比較対象、得られている場合は不確実性 |
+| 結果 | 予定した作業と完了した作業、測定結果、停止・失敗の理由、関連する費用や資源使用量 |
+| 成果物 | 実際の保存先、分かる場合は版・チェックサム、保存済み・ローカル限定・アクセス不可・消失の区別 |
 
-An exact reference to a retained run manifest can cover most of this table.
-Inspect it before relying on it; an unreachable service is not verified evidence.
-Do not invent a URI scheme, checksum, run ID, or successful upload. A local path
-can be recorded as a code-formatted locator with its machine/storage context and
-availability; it is not a portable download link. Avoid private host details in
-public documentation. Git preserves tracked text, not ignored datasets, external
-runs, or missing weights. Missing artifacts can limit reproduction even with a
-complete description.
+保存済みの実行マニフェストへの正確な参照があれば、この表の多くを満たせる。
+参照を根拠として使う前に中身を確認する。接続できないサービスは確認済みの根拠にならない。
+URI形式、チェックサム、実行ID、アップロードの成功を作り上げない。
+ローカルパスは、端末・ストレージの文脈と利用可否を添え、コード表記の保存先として記録できる。
+どこからでも取得できるダウンロードリンクとしては扱わない。公開文書には非公開のホスト情報を含めない。
+Gitに残るのは追跡対象のテキストであり、無視されたデータセット、外部の実行、消失した重みは保存されない。
+説明がそろっていても、成果物の欠落によって再現が制限される場合がある。
 
-For separate generation and analysis, identify both revisions and the input
-artifact consumed by the analysis. Do not replace the generating revision with
-the documentation commit. A config hash alone does not recover its contents.
-Retain the resolved config or a retrievable immutable reference. For commands
-containing secrets, retain safe options and credential-variable names, not values.
+生成と解析を分けて行った場合は、両方のリビジョンと、解析で入力した成果物を特定する。
+生成時のリビジョンを文書更新のコミットで置き換えない。設定のハッシュだけでは内容を復元できないため、
+適用済み設定か、取得できて変更されない参照先を残す。秘密情報を含むコマンドは、
+安全なオプションと認証用変数の名前を残し、値は記録しない。
 
-If recording an already authorized running experiment, save its run/job identity
-and known launch provenance before waiting. Use the task checkpoint for live job
-status. Finalize the durable record when evidence arrives. A proposed run with no
-execution evidence remains a plan. Recording a run does not authorize rerunning it.
+許可済みで実行中の実験を記録する場合は、待機に入る前に実行・ジョブの識別情報と、
+分かっている起動時の来歴を保存する。稼働中のジョブ状態はタスクのチェックポイントで管理し、
+根拠がそろった時点で知識としての記録を仕上げる。実行の証拠がない提案は計画として扱う。
+実行を記録する依頼は、その実行をやり直す許可にはならない。
 
-### Compact example (synthetic)
+### 短い記録の例（合成データ）
 
-> The `cache-window` comparison used runs `bench/control-6` and `bench/window-6`
-> from the same retained manifest. The candidate changed the cache window only;
-> both used requests-v2, split-A, seed 11, and 2,000 requests at concurrency 8.
-> P95 latency was 61 ms versus 58 ms. One repetition does not establish a stable
-> improvement. A concurrency-64 attempt failed after 300 requests with a lock
-> error; it has no final latency. Its settings and failure remain part of this
-> comparison. The manifest pins the code and resolved configs; raw traces were
-> local-only and are now lost, so the reported quantiles cannot be re-audited.
+> `cache-window` の比較では、同じ保存済みマニフェストにある `bench/control-6` と
+> `bench/window-6` を使った。候補側で変えたのはキャッシュ期間だけで、両方とも
+> requests-v2、split-A、シード11、同時実行数8で2,000リクエストという条件だった。
+> P95レイテンシは61 msと58 msだったが、1回の試行では安定した改善とは言えない。
+> 同時実行数64の試行は300リクエスト後にロックエラーで失敗し、最終レイテンシはない。
+> その設定と失敗も、この比較の一部として残す。コードと適用済み設定はマニフェストで
+> 固定されている。生のトレースはローカルにしか保存されておらず、現在は消失しているため、
+> 報告した分位点を再検証できない。
 
-Do not copy example identifiers or results into a real record.
+例の識別子や結果を、実際の記録に転記しない。
 
-## Architecture
+## 構造
 
-Use a stable topic filename. Explain the current responsibility, inputs/outputs,
-important collaborators and constraints. Link to the relevant source and tests;
-note the inspected revision and any unverified area. Include design rationale
-only where it still explains the current implementation. Update this explanation
-after the code changes; do not append obsolete versions or migration diaries.
+話題を表す安定したファイル名を使う。現在の責務、入出力、主要な連携先、制約を説明する。
+関連するソースとテストへリンクし、確認したリビジョンと未検証の範囲を記す。
+設計理由は、現在の実装を説明するうえで意味がある場合だけ含める。
+コードが変わったら説明を更新し、古い版の説明や移行日誌を追記しない。
 
-## Research
+## 調査
 
-Use a stable question or topic filename. State the scope, source versions/dates,
-findings, conflicting evidence, and conclusion with its limitations. Link each
-material claim to a source or experiment. When results differ by protocol,
-population, or code revision, retain that distinction instead of averaging or
-choosing the newest result. Correct a disproven claim explicitly with evidence;
-do not silently turn a historical observation into a different result.
+問いや話題を表す安定したファイル名を使う。範囲、出典の版・日付、知見、矛盾する根拠、
+結論とその限界を示す。重要な主張ごとに出典や実験へリンクする。
+評価手順、母集団、コードのリビジョンによって結果が異なる場合は、その違いを保ち、
+平均したり最新の結果だけを選んだりしない。反証された主張は根拠を添えて明示的に訂正し、
+過去の観測結果を説明なく別の結果に変えない。

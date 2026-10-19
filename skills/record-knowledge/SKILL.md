@@ -1,67 +1,60 @@
 ---
 name: record-knowledge
-description: Use when recording an experiment, investigation, or implemented architecture as durable project knowledge, including failed or interrupted runs and reproducibility evidence. Not for temporary plans or routine progress updates.
+description: 実験・調査・実装済みの構造を、プロジェクトで長く使う知識として記録するときに使う。失敗・中断した実行や再現の根拠も対象とする。一時的な計画や通常の進捗報告には使わない。
 license: MIT
 ---
 
-# Record knowledge
+# 知識を記録する
 
-Leave the smallest accurate record that another person can understand and use
-without this conversation. Write in the project's language and existing layout.
-The installed skill contains guidance; all records belong in the target project.
+この会話を知らない人でも理解して使える、必要最小限の正確な記録を残す。
+プロジェクトの言語と既存の配置に合わせる。記録はすべて対象のプロジェクトに保存し、
+インストールされたSkillには手順だけを置く。
 
-## Choose the owner
+## 記録先を選ぶ
 
-Read the project's instructions, documentation entry point, and relevant code or
-evidence. Search for an existing record of this topic or run before creating one.
-Extend that record when it answers the same question. Avoid a report per tool
-call, session, seed, or rerun; a coherent comparison can hold several run IDs.
+プロジェクトの指示、文書の入口、関連するコードや根拠を読む。新しい記録を作る前に、
+同じ話題や実行の記録を探し、同じ問いに答えるものがあれば更新する。
+ツール呼び出し、セッション、シード、再実行ごとに報告書を増やさない。
+一つの比較として整理できる実行は、複数の実行IDを同じ記録にまとめてよい。
 
-| Knowledge | Content | Default when no convention exists |
+| 知識の種類 | 内容 | 既存の決まりがない場合の保存先 |
 | --- | --- | --- |
-| Architecture | What the code currently implements | `docs/architecture/<topic>.md` |
-| Experiment | What was actually tried, observed, and concluded | `docs/experiments/<date>-<topic>.md` |
-| Research | A sourced investigation or synthesis across evidence | `docs/research/<topic>.md` |
+| 構造 | 現在のコードが実装していること | `docs/architecture/<topic>.md` |
+| 実験 | 実際に試したこと、観測結果、結論 | `docs/experiments/<date>-<topic>.md` |
+| 調査 | 出典のある調査や、複数の根拠からまとめた知見 | `docs/research/<topic>.md` |
 
-Create only the needed file. Use an existing README as the entry point; add a
-small `docs/README.md` only when navigation needs it. Indexes contain links and
-brief purpose, not copied metrics, conclusions, or task status.
+必要なファイルだけを作る。既存のREADMEを入口にし、案内に必要な場合だけ短い
+`docs/README.md` を追加する。目次にはリンクと短い目的を置き、指標、結論、
+タスクの状態を複製しない。
 
-## Record evidence, then interpretation
+## 根拠を確認してから解釈を書く
 
-- **Architecture:** inspect the relevant implementation and tests. Explain
-  boundaries, data flow, and important constraints with source paths or symbols
-  and the inspected revision. Qualify dirty or unverified code. Future designs
-  belong in the task's plan, not in the description of the current system.
-- **Experiment:** capture the question, actual conditions, outcomes, and limits.
-  Connect the run to its configuration, source, data, evaluation, and artifacts.
-  Read [record shapes](references/records.md) when composing a record, especially
-  for dirty source trees, multiple commits, or unavailable artifacts.
-- **Research:** state the question, scope, findings and evidence, contradictions,
-  and what can be concluded. Distinguish observed facts from inference. Cite
-  original sources and relevant experiment records; add access dates or versions
-  for changing sources. Preserve negative results and alternative explanations.
+- 構造の記録では、関連する実装とテストを調べる。責務の境界、データの流れ、
+  重要な制約を、ソースのパスやシンボル、確認したリビジョンとともに説明する。
+  未コミットの変更や未検証のコードは、その状態を明記する。将来の設計はタスクの
+  計画に置き、現在のシステムの説明に混ぜない。
+- 実験の記録には、問い、実際の条件、結果、限界を残す。実行と設定、ソース、データ、
+  評価、成果物を対応づける。記録を書くときは[記録に含める情報](references/records.md)を読む。
+  特に未コミットの変更、複数のコミット、利用できない成果物がある場合に確認する。
+- 調査の記録には、問い、範囲、知見と根拠、矛盾、結論として言えることを書く。
+  観測した事実と推論を区別する。一次資料と関連する実験記録を引用し、内容が変わる
+  資料には参照日や版を付ける。否定的な結果や別の説明も残す。
 
-Use the existing tracker, database, manifests, and configs as their respective
-sources of truth. Keep selected evidence and interpretation in Markdown, with
-enough identity and retrieval context to find the original. Do not export whole
-run registries or duplicate logs into a second tracking system.
+既存のトラッカー、データベース、マニフェスト、設定を、それぞれの情報の正本として扱う。
+Markdownには必要な根拠と解釈を残し、元の情報を特定して取得できる識別情報と参照先を添える。
+実行台帳の全件を書き出したり、別の管理システムにログを複製したりしない。
 
-Record actual resolved settings and overrides; today's config and Git HEAD may
-not describe yesterday's run. Separate generation/training and analysis commits
-when they differ. Missing provenance is an explicit gap, not a field to guess.
-Only claim completion, causality, or improvement supported by the measurements
-and comparable evaluation conditions. Keep interrupted, failed, and unevaluated
-work distinguishable from successful results.
+実際に適用された設定と上書きを記録する。現在の設定やGitのHEADが、過去の実行を表すとは限らない。
+生成・学習と解析でコミットが異なる場合は分けて記録する。来歴が不明な部分は欠落として明記し、
+推測で埋めない。完了、因果関係、改善を主張するのは、測定結果と比較可能な評価条件で
+裏付けられる場合だけにする。中断、失敗、未評価の作業を、成功した結果と区別する。
 
-## Finish
+## 記録を仕上げる
 
-Check important numbers, IDs, units, denominators, source links, and availability
-claims against evidence. When you cannot verify something, say what is missing.
-Keep credentials and sensitive data out of records and URLs; record a safe
-locator or an explicit access limitation instead.
+重要な数値、ID、単位、分母、出典リンク、利用できるとした情報を根拠と照合する。
+確認できない場合は、何が不足しているかを書く。認証情報や機密データを記録やURLに含めず、
+安全に示せる保存先か、アクセス上の制約を記す。
 
-Link related knowledge without copying its contents. Put remaining execution
-steps in the existing task tracker or plan and link it only if useful. A small
-correction belongs in the current record; a wider consolidation is a separate
-curation pass. Report the record changed and any material evidence gaps.
+関連する知識は内容を複製せずにリンクする。残りの実行手順は既存のタスク管理や計画に置き、
+役立つ場合だけリンクする。小さな訂正は現在の記録で行い、広い範囲の統合は別の整理作業にする。
+変更した記録と、根拠の重要な欠落を報告する。

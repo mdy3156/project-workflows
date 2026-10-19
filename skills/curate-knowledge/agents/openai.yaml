@@ -1,4 +1,4 @@
 interface:
-  display_name: "Curate Knowledge"
-  short_description: "Consolidate knowledge without losing evidence"
-  default_prompt: "Use $curate-knowledge to consolidate the relevant project documentation, preserve reproducibility, and retire redundant Markdown."
+  display_name: "知識を整理する"
+  short_description: "実験の再現情報と根拠を保ち、重複したプロジェクト文書を統合・整理する"
+  default_prompt: "$curate-knowledge を使い、関連するプロジェクト文書を統合してください。再現に必要な根拠を保ち、役割を終えたMarkdownを削除してください。"

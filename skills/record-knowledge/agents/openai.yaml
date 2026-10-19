@@ -1,4 +1,4 @@
 interface:
-  display_name: "Record Knowledge"
-  short_description: "Record project knowledge with traceable evidence"
-  default_prompt: "Use $record-knowledge to capture this experiment, investigation, or implemented architecture in the project's existing documentation."
+  display_name: "知識を記録する"
+  short_description: "実験・調査・実装の構造を、根拠をたどれるプロジェクトの知識として記録する"
+  default_prompt: "$record-knowledge を使い、この実験・調査・実装済みの構造を、プロジェクトの既存文書に記録してください。"

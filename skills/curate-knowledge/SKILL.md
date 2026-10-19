@@ -1,82 +1,71 @@
 ---
 name: curate-knowledge
-description: Use when project documentation has overlapping findings, stale architecture, scattered experiment knowledge, or completed plans to retire, and the user wants consolidation or cleanup. Not for merely recording one new result.
+description: 知見の重複、古い構造説明、散在する実験の知識、役割を終えた計画があり、利用者がプロジェクト文書の統合や整理を求めたときに使う。新しい結果を一件記録するだけの場合には使わない。
 license: MIT
 ---
 
-# Curate knowledge
+# 知識を整理する
 
-Reduce the reading needed to understand a topic while retaining its evidence.
-Work in the requested scope, using the project's language and conventions.
-The target is useful knowledge, not an arbitrary document count.
+根拠を保ちながら、話題を理解するために読む量を減らす。
+依頼された範囲で、プロジェクトの言語と既存の決まりに合わせて作業する。
+役立つ知識に整理することを目的とし、文書数そのものを目標にしない。
 
-## Find what belongs together
+## 一緒に整理する情報を探す
 
-Read the documentation entry point and relevant project instructions. Inspect
-Git status, including untracked files, before editing. Search by question,
-component, dataset, evaluation protocol, run ID, and source symbol, not just
-filenames or dates. Read connected records and their evidence before selecting
-the surviving owner of each topic. Do this inventory in working context; do not
-create a permanent inventory or a second knowledge registry.
+文書の入口と関連するプロジェクトの指示を読む。編集前に、未追跡ファイルを含むGitの状態を確認する。
+ファイル名や日付に加え、問い、構成要素、データセット、評価手順、実行ID、ソースのシンボルで探す。
+関連する記録と根拠を読んでから、各話題をどの文書に残すか決める。
+関連文書の洗い出しは作業中の把握にとどめ、恒久的な目録や二つ目の知識台帳は作らない。
 
-Keep the roles clear:
+文書の役割を分ける。
 
-| Kind | Surviving owner should explain |
+| 種類 | 残す文書で説明すること |
 | --- | --- |
-| Architecture | Current implementation, verified against source and tests |
-| Experiment | Actual conditions, observations, failures, and reproducibility |
-| Research | Synthesis across evidence, including disagreement and limits |
-| Task/design | Unfinished work and future intent, kept in its existing planner |
+| 構造 | ソースとテストで確認した現在の実装 |
+| 実験 | 実際の条件、観測、失敗、再現に必要な情報 |
+| 調査 | 根拠間の不一致や限界も含め、複数の根拠からまとめた知見 |
+| タスク・設計 | 未完了の作業と今後の意図。既存の計画管理に残す |
 
-Prefer updating an established topic document. Related experiments can share a
-comparison record; do not flatten independent run conditions into one result.
-An entry point should remain navigation, not become a copy of all four kinds.
-No new directory structure is required for a project that already has one.
+その話題の既存文書を更新することを優先する。関連する実験は一つの比較記録にまとめてよいが、
+独立した実行の条件を一つの結果に混ぜない。入口の文書は案内にとどめ、4種類の内容を複製しない。
+既存の配置があるプロジェクトに、新しいディレクトリ構造を求めない。
 
-## Integrate without changing the evidence
+## 根拠を変えずに統合する
 
-For each candidate, decide whether to keep, correct, merge, or retire it. Move
-unique facts into their surviving owner before removing the old text. Preserve
-failed attempts, negative findings, caveats, and unresolved contradictions.
-Different splits, populations, revisions, or metrics can explain conflicting
-results; recency alone does not decide which is true.
+候補ごとに、残す、訂正する、統合する、役割を終えた文書として削除する、のどれかを決める。
+古い文章を削除する前に、固有の事実を残す文書へ移す。失敗した試行、否定的な知見、注意点、
+未解決の矛盾を保つ。分割、母集団、リビジョン、指標の違いが結果の矛盾を説明する場合があり、
+新しいという理由だけでは、どちらが正しいか決められない。
 
-Verify current architecture from the code. Historical experiments retain their
-original execution conditions. A new analysis may correct an interpretation,
-but must identify its evidence and leave the original observation intelligible.
-Research should link to experiment evidence rather than duplicate all run tables.
+現在の構造はコードで確認する。過去の実験には当時の実行条件を残す。
+新しい解析で解釈を訂正する場合は、その根拠を特定し、元の観測内容も理解できるようにする。
+調査から実験の根拠へリンクし、実行結果の表をすべて複製しない。
 
-For every merged experiment, retain the run namespace/ID, generating and analysis
-revisions, actual config/overrides, data and evaluation identity, outcome, and
-retrievable artifact or manifest references needed to reconstruct it. If an
-external tracker is unavailable, retain the surviving local evidence and mark
-the gap. A high-level conclusion cannot replace the only reproduction recipe.
+統合する各実験について、実行の名前空間・ID、生成時と解析時のリビジョン、実際の設定・上書き、
+データと評価の識別情報、結果、再構成に必要で取得可能な成果物やマニフェストへの参照を残す。
+外部トラッカーを利用できない場合は、残っているローカルの根拠を保ち、欠落を明記する。
+唯一の再現手順を、概要の結論だけで置き換えない。
 
-## Retire safely
+## 安全に文書を削除する
 
-Remove a document only when all of these are true:
+次の条件をすべて満たす場合だけ、文書を削除する。
 
-- It is within the cleanup scope and no longer owns unique useful information.
-- Its important evidence is available from the surviving documents and their
-  verified references; neither Git history alone nor an unchecked remote service
-  substitutes for discoverable current evidence.
-- The version being removed is recoverable in Git. For untracked files or
-  uncommitted edits, preserve that version in an authorized commit first, or
-  keep the original and report the remaining cleanup. Do not commit unrelated
-  work or assume permission to commit/push.
-- Incoming links and plain-text path references in docs, plans, instructions,
-  and code have been repaired. Check anchors when headings move too.
+- 整理の対象範囲に含まれ、その文書にしかない有用な情報が残っていない。
+- 重要な根拠を、残す文書と確認済みの参照先から取得できる。Git履歴だけや未確認の外部サービスを、
+  現在たどれる根拠の代わりにしない。
+- 削除する版をGitで復元できる。未追跡ファイルや未コミットの編集は、その版を許可された
+  コミットに先に保存するか、原本を残して未完の整理を報告する。無関係な作業をコミットせず、
+  コミット・プッシュの許可があると決めつけない。
+- 文書、計画、指示、コードからのリンクと、パスを直接書いた参照を修復済みである。
+  見出しを移した場合は、アンカーも確認する。
 
-Delete retired Markdown rather than creating an archive, tombstone, or duplicate
-summary. Keep unfinished plans. Retire a completed plan only after its useful
-implementation knowledge, results, and open questions have surviving owners.
-Knowledge cleanup does not authorize deleting configs, raw data, artifacts,
-tracker entries, source code, or unrelated user notes.
+役割を終えたMarkdownは削除し、アーカイブ、削除済みを示すだけの文書、重複する要約を作らない。
+未完了の計画は残す。完了した計画は、役立つ実装の知識、結果、未解決の問いを残す文書に
+移してから削除する。知識の整理を依頼されても、設定、生データ、成果物、トラッカーの項目、
+ソースコード、無関係な利用者のメモを削除する権限は生じない。
 
-For example, merge two descriptions of one successful run, but retain the
-failed high-concurrency attempt and its sole invocation in the surviving
-experiment. Update the architecture separately from those historical results.
+たとえば、一つの成功した実行を説明する2文書は統合する。一方、高い同時実行数で失敗した試行と、
+その唯一の起動コマンドは、残す実験記録に保持する。現在の構造は、過去の実験結果と分けて更新する。
 
-Finish by reviewing the diff, remaining references, and whether a new reader
-can locate both the conclusion and its evidence. Report the owners updated,
-documents removed, and specific evidence or history gaps that prevented cleanup.
+仕上げに差分と残った参照を見直し、初めて読む人が結論と根拠の両方を見つけられるか確認する。
+更新した文書、削除した文書、整理を進められなかった具体的な根拠・履歴の欠落を報告する。

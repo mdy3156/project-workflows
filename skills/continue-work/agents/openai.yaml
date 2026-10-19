@@ -1,4 +1,4 @@
 interface:
-  display_name: "Continue Work"
-  short_description: "Checkpoint and resume work across sessions"
-  default_prompt: "Use $continue-work to recover the selected task from its saved state, verify the current evidence, and continue the next authorized step."
+  display_name: "作業を保存・再開する"
+  short_description: "既存の計画と実際の状態を照合し、セッションをまたぐ作業の保存・再開を支援する"
+  default_prompt: "$continue-work を使い、選んだタスクの保存済み状態と実際の根拠を照合し、次の許可された作業を進めてください。"
